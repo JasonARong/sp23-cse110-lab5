@@ -64,5 +64,16 @@ const faceImg = document.querySelector("img");
         selectedVoice = voices[i];
       }
     }
-  });
+
+  })
+
+  speakBtn.addEventListener('click',() => {
+    //console.log('pressed');
+    const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+
+    utterThis.voice = selectedVoice;
+    synth.speak(utterThis);
+  
+    inputTxt.blur();
+  })
 }
