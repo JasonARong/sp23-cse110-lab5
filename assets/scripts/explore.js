@@ -53,7 +53,8 @@ function init() {
 
   })
 
-  speakBtn.addEventListener('click',() => {
+  speakBtn.addEventListener('click',(event) => {
+    event.preventDefault();
     //console.log('pressed');
     const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
 
