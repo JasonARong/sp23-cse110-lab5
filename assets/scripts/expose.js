@@ -1,6 +1,4 @@
-// expose.js
-
-
+// expose.js  
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -12,7 +10,7 @@ function init() {
   const audio = document.querySelector('audio');
   const icon = document.querySelector('#volume-controls img');
   const button = document.querySelector('button');
-
+  const jsConfetti = new JSConfetti({ button });
   // Change picture and audio after horn selection
   selection.addEventListener('change', (event) => {
     // change picture source
@@ -21,7 +19,9 @@ function init() {
     audio.setAttribute('src', `assets/audio/${event.target.value}.mp3`);
 
     if (event.target.value === "party-horn") {
-      confetti();
+      button.addEventListener('click', () => {
+        jsConfetti.addConfetti()
+      })
     }
   });
 
