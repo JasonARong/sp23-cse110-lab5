@@ -41,19 +41,8 @@ const faceImg = document.querySelector("img");
     speechSynthesis.onvoiceschanged = populateVoiceList;
   }
 
-  speakBtn.addEventListener('click',() => {
-    const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
 
-    utterThis.voice = selectedVoice;
-    synth.speak(utterThis);
-    faceImg.setAttribute("src", "assets/images/smiling-open.png");
-
-    utterThis.onend = function() {
-      faceImg.setAttribute("src", "assets/images/smiling.png");
-    };
-    inputTxt.blur();
-  });
-
+  // get the correct vice when switching between voices
   voiceSelect.addEventListener('change', (event) =>{
     // get the name of the selected voice
     const selectedOption = event.target.selectedOptions[0].getAttribute("data-name")
@@ -68,12 +57,17 @@ const faceImg = document.querySelector("img");
   })
 
   speakBtn.addEventListener('click',() => {
-    //console.log('pressed');
     const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
 
     utterThis.voice = selectedVoice;
     synth.speak(utterThis);
-  
+    faceImg.setAttribute("src", "assets/images/smiling-open.png");
+
+    utterThis.onend = function() {
+      faceImg.setAttribute("src", "assets/images/smiling.png");
+    };
     inputTxt.blur();
-  })
+  });
+
+
 }

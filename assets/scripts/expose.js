@@ -2,6 +2,7 @@
 
 window.addEventListener('DOMContentLoaded', init);
 
+
 function init() {
   // getting HTML elements
   const hornImg = document.querySelector('img');
@@ -10,19 +11,31 @@ function init() {
   const audio = document.querySelector('audio');
   const icon = document.querySelector('#volume-controls img');
   const button = document.querySelector('button');
-  const jsConfetti = new JSConfetti({ button });
+  const jsConfetti = new JSConfetti();
+
+  // make the button diabled on default 
+  button.disabled = true;
+
+  // function confetti has to be outside of event listener 
+  // to ensure add/remove listener refer to the same function
+  function confetti(){
+    jsConfetti.addConfetti();
+  }
   // Change picture and audio after horn selection
   selection.addEventListener('change', (event) => {
+    button.disabled = false;
     // change picture source
     hornImg.setAttribute('src', `assets/images/${event.target.value}.svg`);
     // change audio source
     audio.setAttribute('src', `assets/audio/${event.target.value}.mp3`);
 
     if (event.target.value === "party-horn") {
-      button.addEventListener('click', () => {
-        jsConfetti.addConfetti()
-      })
+      button.addEventListener('click', confetti);
+    }else{
+      // remove confetti on other horns
+      button.removeEventListener('click', confetti);
     }
+    
   });
 
   // Play sound on button click
@@ -48,3 +61,4 @@ function init() {
     }
   });
 }
+
