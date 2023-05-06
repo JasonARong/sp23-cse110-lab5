@@ -61,8 +61,11 @@ const faceImg = document.querySelector("img");
 
     utterThis.voice = selectedVoice;
     synth.speak(utterThis);
-    faceImg.setAttribute("src", "assets/images/smiling-open.png");
-
+    // only open mouth when the input value is not empty
+    if(inputTxt.value != ''){
+      faceImg.setAttribute("src", "assets/images/smiling-open.png");
+    }
+    
     utterThis.onend = function() {
       faceImg.setAttribute("src", "assets/images/smiling.png");
     };
